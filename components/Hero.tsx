@@ -26,7 +26,7 @@ export function Hero() {
             French,<br/><em>with direction.</em>
           </motion.h1>
           <motion.p className="hero__dek" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8, delay: .42 }}>
-            Personal online French coaching for TEF, TCF and DELF learners — guided by a C1-level certified tutor.
+            Personal online French coaching for TEF, TCF and DELF learners guided by a C1-level certified tutor.
           </motion.p>
           <motion.div className="hero__actions" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .58 }}>
             <Link className="button button--accent" href="/#programs"><span>Explore programs</span><Arrow/></Link>
