@@ -513,3 +513,65 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--bordeaux); outli
   .language-journey__stage { height:auto; display:flex; flex-direction:column; gap:1rem; }
   .language-journey__stage p { position:relative; opacity:1 !important; transform:none !important; font-size:clamp(3rem, 10vw, 7rem); }
 }
+/* =========================================
+   PREMIUM NAVIGATION OVERRIDE
+   ========================================= */
+
+@media (min-width: 801px) {
+  .nav__inner {
+    height: 104px;
+    gap: 3rem;
+  }
+
+  .wordmark {
+    column-gap: .3rem;
+    line-height: .7;
+  }
+
+  .wordmark__the {
+    font-size: .92rem;
+    padding-bottom: .16rem;
+  }
+
+  .wordmark__francais {
+    font-size: 1.75rem;
+    letter-spacing: -.04em;
+  }
+
+  .wordmark__hub {
+    font-size: .9rem;
+    margin-top: .22rem;
+  }
+
+  .nav__links {
+    gap: 2.8rem;
+  }
+
+  .nav__links a {
+    font-size: .81rem;
+    font-weight: 600;
+    letter-spacing: .015em;
+  }
+
+  .button--nav {
+    min-height: 50px;
+    padding: .8rem 1.35rem;
+    font-size: .79rem;
+  }
+
+  .nav--scrolled {
+    background: rgba(245, 242, 236, .88);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-color: rgba(23, 23, 25, .075);
+    box-shadow: 0 12px 40px rgba(23, 23, 25, .035);
+  }
+
+  .hero {
+    padding-top: 104px;
+  }
+
+  .hero__grid {
+    min-height: calc(100svh - 104px);
+  }
+}
