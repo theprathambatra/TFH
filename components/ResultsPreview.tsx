@@ -28,7 +28,7 @@ export function ResultsPreview() {
   return (
     <section className="section results-preview" id="results">
       <div className="container">
-        <Reveal className="section-head section-head--split"><div><p className="eyebrow">Student outcomes</p><h2>Des résultats<br/><em>qui parlent.</em></h2></div><p>Actual anonymised score documents from students, presented without inflated claims or manufactured counters.</p></Reveal>
+        <Reveal className="section-head section-head--split"><div><p className="eyebrow">Student outcomes</p><h2>Des résultats<br/><em>qui parlent.</em></h2></div><p>Recent student outcomes, shared as real scorecards with personal details respectfully hidden.</p></Reveal>
         <div className="results-preview__grid">
           <Reveal><ResultMini label="TEF Canada" rows={tefResult} onOpen={() => setModal({ src: asset("/results/tef-result.jpg"), alt: "Anonymised TEF Canada student result" })}/></Reveal>
           <Reveal delay={.08}><ResultMini label="TCF Canada" rows={tcfResult} onOpen={() => setModal({ src: asset("/results/tcf-result.jpg"), alt: "Anonymised TCF Canada student result" })}/></Reveal>
