@@ -268,7 +268,7 @@ h1 em,h2 em { font-weight: 400; }
 /* max four */
 .max-four { background:#ebe5dc; }
 .max-four__grid { display:grid; grid-template-columns:1.15fr .85fr; gap:5rem; align-items:end; }
-.max-four__number { font-family:var(--serif); font-size:clamp(12rem, 28vw, 30rem); letter-spacing:-.08em; line-height:.56; color:var(--blue); }
+.max-four__number { font-family:var(--serif); font-size:clamp(12rem, 25vw, 27rem); letter-spacing:-.08em; line-height:.62; color:var(--blue); }
 .max-four__number span { color:var(--bordeaux); }
 .max-four__copy { padding-bottom:1.5rem; }
 .max-four__copy h2 { font-size:clamp(4rem, 8vw, 8rem); line-height:.82; margin:0 0 2rem; color:var(--blue); }
@@ -573,5 +573,28 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--bordeaux); outli
 
   .hero__grid {
     min-height: calc(100svh - 104px);
+  }
+}
+/* FIX — MAXIMUM 04 EYEBROW SPACING */
+
+.max-four .eyebrow {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 3.5rem;
+}
+
+.max-four__number {
+  position: relative;
+  z-index: 1;
+  margin-top: 1rem;
+}
+
+@media (max-width: 800px) {
+  .max-four .eyebrow {
+    margin-bottom: 2rem;
+  }
+
+  .max-four__number {
+    margin-top: 0;
   }
 }
