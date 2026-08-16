@@ -176,10 +176,10 @@ export function ProgressExperience() {
               onMouseEnter={() => setActive(index)}
               onFocus={() => setActive(index)}
               onClick={() => setActive(index)}
-              initial={{ opacity: 0, scale: .7 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: .45, delay: .25 + index * .12, type: "spring", stiffness: 150, damping: 16 }}
+              transition={{ duration: .5, delay: .25 + index * .12 }}
             >
               {index === 2 && <span className={ui.youAreHere}>YOU ARE HERE</span>}
               <strong>{level.code}</strong>
