@@ -10,7 +10,7 @@ const links = [
   ["Programs", "/#programs"],
   ["About", "/about"],
   ["Results", "/results"],
-  ["Resources", "https://tfh-resources-admin-k2ii.vercel.app"],
+  ["Resources", "https://tfh-resources-theprathambatras-projects.vercel.app"],
 ];
 
 export function Navigation() {
