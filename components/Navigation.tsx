@@ -7,6 +7,7 @@ import { Wordmark } from "./Wordmark";
 
 const links = [
   ["Programs", "/#programs"],
+  ["Le Hub", "/le-hub"],
   ["About", "/about"],
   ["Results", "/results"],
   ["Resources", "https://tfh-resources-theprathambatras-projects.vercel.app"],
