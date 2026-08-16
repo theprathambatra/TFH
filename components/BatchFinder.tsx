@@ -24,6 +24,18 @@ type Batch = {
   timezone?: string;
 };
 
+type BatchPayload = {
+  batches?: Batch[];
+  timezone?: string;
+  error?: string;
+};
+
+declare global {
+  interface Window {
+    __TFH_BATCH_PAYLOAD__?: BatchPayload;
+  }
+}
+
 const COURSES: { code: Course; title: string; note: string }[] = [
   { code: "TEF", title: "TEF", note: "Canada & score-focused preparation" },
   { code: "TCF", title: "TCF", note: "Structured exam preparation" },
@@ -43,6 +55,40 @@ const DAY_LABELS: Record<string, string> = {
 const API_URL =
   process.env.NEXT_PUBLIC_BATCH_API_URL ||
   "https://tfh-resources-theprathambatras-projects.vercel.app/api/batches";
+
+const SCRIPT_URL = API_URL.replace(/\/api\/batches\/?$/, "/api/batches-script");
+
+function loadBatchScript(): Promise<BatchPayload> {
+  return new Promise((resolve, reject) => {
+    if (typeof window === "undefined") {
+      reject(new Error("Browser unavailable"));
+      return;
+    }
+
+    delete window.__TFH_BATCH_PAYLOAD__;
+    const script = document.createElement("script");
+    script.src = `${SCRIPT_URL}?t=${Date.now()}`;
+    script.async = true;
+
+    const cleanup = () => {
+      script.remove();
+    };
+
+    script.onload = () => {
+      const payload = window.__TFH_BATCH_PAYLOAD__;
+      cleanup();
+      if (payload && Array.isArray(payload.batches)) resolve(payload);
+      else reject(new Error("Batch fallback did not return data"));
+    };
+
+    script.onerror = () => {
+      cleanup();
+      reject(new Error("Batch fallback failed"));
+    };
+
+    document.head.appendChild(script);
+  });
+}
 
 function formatTime(value: string) {
   const [h = "0", m = "00"] = String(value || "").split(":");
@@ -98,10 +144,21 @@ export function BatchFinder({ standalone = false }: { standalone?: boolean }) {
       try {
         const response = await fetch(API_URL, { cache: "no-store" });
         if (!response.ok) throw new Error("Availability request failed");
-        const body = await response.json();
-        if (active) setBatches(Array.isArray(body.batches) ? body.batches : []);
+        const body: BatchPayload = await response.json();
+        if (active) {
+          setBatches(Array.isArray(body.batches) ? body.batches : []);
+          setError(false);
+        }
       } catch {
-        if (active) setError(true);
+        try {
+          const body = await loadBatchScript();
+          if (active) {
+            setBatches(Array.isArray(body.batches) ? body.batches : []);
+            setError(false);
+          }
+        } catch {
+          if (active) setError(true);
+        }
       } finally {
         if (active) setLoading(false);
       }
