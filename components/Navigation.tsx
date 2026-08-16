@@ -4,7 +4,6 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { Wordmark } from "./Wordmark";
-import { WhatsAppLink } from "./WhatsAppLink";
 
 const links = [
   ["Programs", "/#programs"],
@@ -38,7 +37,7 @@ export function Navigation() {
             {links.map(([label, href]) => <Link key={label} href={href}>{label}</Link>)}
           </nav>
           <div className="nav__actions">
-            <WhatsAppLink className="button button--nav">Start learning</WhatsAppLink>
+            <Link href="/find-your-batch" className="button button--nav">Find your batch</Link>
             <button className="nav__menu" onClick={() => setOpen(true)} aria-label="Open menu" aria-expanded={open}>
               <span/><span/>
             </button>
@@ -61,7 +60,7 @@ export function Navigation() {
                   </Link>
                 ))}
               </div>
-              <WhatsAppLink className="button button--dark mobile-menu__cta">Talk to Yana</WhatsAppLink>
+              <Link href="/find-your-batch" onClick={() => setOpen(false)} className="button button--dark mobile-menu__cta">Find your batch</Link>
             </motion.div>
           </motion.div>
         )}

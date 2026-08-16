@@ -8,6 +8,7 @@ import { ResultsPreview } from "@/components/ResultsPreview";
 import { Approach } from "@/components/Approach";
 import { LanguageJourney } from "@/components/LanguageJourney";
 import { ClassFormat } from "@/components/ClassFormat";
+import { BatchFinder } from "@/components/BatchFinder";
 import { ResourcesFeature } from "@/components/ResourcesFeature";
 import { FinalCta } from "@/components/FinalCta";
 
@@ -23,6 +24,7 @@ export default function Home() {
     <Approach/>
     <LanguageJourney/>
     <ClassFormat/>
+    <BatchFinder/>
     <ResourcesFeature/>
     <FinalCta/>
   </>;
