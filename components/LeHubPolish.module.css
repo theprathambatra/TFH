@@ -28,7 +28,7 @@
 .lexiqueCardFloat:before{content:"";position:absolute;inset:-18px 24px 18px -18px;border:1px solid rgba(200,122,135,.2);pointer-events:none}
 
 .insideRefined{position:relative}
-.insideRefined:before{content:"";position:absolute;left:50%;top:0;height:100%;width:1px;background:linear-gradient(to bottom,transparent,rgba(23,40,59,.08) 12%,rgba(23,40,59,.08) 88%,transparent)}
+.insideRefined:before{content:"";position:absolute;left:50%;top:7%;height:86%;width:1px;background:rgba(23,40,59,.065)}
 .sectionHeadRefined{margin-bottom:4.5rem!important}
 .learningFlowWrap{position:relative;margin:0 0 clamp(7rem,11vw,11rem);padding:2.2rem;border:1px solid rgba(23,40,59,.13);background:rgba(255,255,255,.34);overflow:hidden}
 .learningFlowTop{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:2rem}
@@ -55,7 +55,6 @@
 .workspaceFrameRefined{overflow:hidden;border:1px solid rgba(245,242,236,.14)}
 .workspaceFrameRefined>div{min-width:0!important;width:100%!important}
 
-.progressiveReveal{transform-origin:center}
 .motionUnderline{position:relative;display:inline-block}
 .motionUnderline:after{content:"";position:absolute;left:0;right:0;bottom:-.08em;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;animation:drawLine 1.2s .65s cubic-bezier(.22,1,.36,1) forwards}
 @keyframes drawLine{to{transform:scaleX(1)}}
