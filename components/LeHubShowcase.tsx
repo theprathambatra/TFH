@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { asset } from "@/lib/site";
 import styles from "./LeHubShowcase.module.css";
+import polish from "./LeHubPolish.module.css";
 
 const reveal = {
   initial: { opacity: 0, y: 34 },
@@ -11,6 +12,30 @@ const reveal = {
   viewport: { once: true, margin: "-12%" },
   transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
 };
+
+const learningFlow = [
+  ["01", "Class", "Watch, listen, take notes."],
+  ["02", "Practice", "Use it while it is fresh."],
+  ["03", "Feedback", "Yana responds personally."],
+  ["04", "Revision", "Return at the right moment."],
+  ["05", "Progress", "See what is actually changing."],
+];
+
+const lexiqueTools = [
+  ["sound", "Pronunciation", "Hear it. Repeat it."],
+  ["nodes", "Conjugation", "See the verb move."],
+  ["speech", "Natural usage", "Learn how it lives."],
+  ["bookmark", "Saved vocabulary", "Keep what matters."],
+  ["revision", "Revision", "Meet it again later."],
+];
+
+function ToolIcon({ type }: { type: string }) {
+  if (type === "sound") return <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5 12v4M9 9v10M13 6v16M17 10v8M21 8v12"/></svg>;
+  if (type === "nodes") return <svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="8" cy="8" r="2.5"/><circle cx="20" cy="8" r="2.5"/><circle cx="14" cy="20" r="2.5"/><path d="M10.2 9.2 12.7 17M17.8 9.2 15.3 17M10.5 8h7"/></svg>;
+  if (type === "speech") return <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5 7h18v12H12l-5 4v-4H5z"/><path d="M9 12h10M9 15h7"/></svg>;
+  if (type === "bookmark") return <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M8 5h12v18l-6-4-6 4z"/></svg>;
+  return <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M21 9a8 8 0 1 0 1 8"/><path d="M21 5v4h-4"/></svg>;
+}
 
 function ProgressRing() {
   return (
@@ -24,9 +49,9 @@ function ProgressRing() {
   );
 }
 
-function MiniDashboard() {
+function MiniDashboard({ story = false }: { story?: boolean }) {
   return (
-    <div className={styles.productWindow}>
+    <div className={`${styles.productWindow} ${story ? polish.storyWindow : ""}`}>
       <div className={styles.windowTop}>
         <div className={styles.windowBrand}>le hub<span>.</span></div>
         <div className={styles.windowDate}>Tuesday · 14 October</div>
@@ -34,7 +59,7 @@ function MiniDashboard() {
       </div>
       <div className={styles.windowBody}>
         <aside className={styles.sideNav}>
-          <span className={styles.sideActive}>Overview</span>
+          <span className={styles.sideActive}>Dashboard</span>
           <span>Course</span>
           <span>Workspace</span>
           <span>Bibliothèque</span>
@@ -73,7 +98,7 @@ function MiniDashboard() {
 
 function CourseScreen() {
   return (
-    <div className={`${styles.productWindow} ${styles.screenCourse}`}>
+    <div className={`${styles.productWindow} ${styles.screenCourse} ${polish.storyWindow} ${polish.courseWindow}`}>
       <div className={styles.windowTop}>
         <div className={styles.windowBrand}>le hub<span>.</span></div>
         <div className={styles.windowDate}>Current course · TEF</div>
@@ -130,7 +155,7 @@ function LexiqueCard() {
   return (
     <div className={styles.lexiqueCard}>
       <div className={styles.lexiqueTop}><span>LEXIQUE</span><span>FR → EN</span></div>
-      <div className={styles.lexiqueWordRow}><h3>convaincre</h3><button type="button" tabIndex={-1}>↗</button></div>
+      <div className={styles.lexiqueWordRow}><h3>convaincre</h3><button type="button" tabIndex={-1} aria-label="Hear pronunciation">♪</button></div>
       <p className={styles.phonetic}>/kɔ̃.vɛ̃kʁ/ · verbe</p>
       <div className={styles.meaning}><small>MEANING</small><strong>to convince · to persuade</strong></div>
       <div className={styles.example}><small>IN CONTEXT</small><p>Il faut <em>convaincre</em> l&apos;examinateur avec une idée claire, pas avec des phrases compliquées.</p></div>
@@ -156,37 +181,79 @@ export function LeHubShowcase() {
       <section className={styles.hero}>
         <div className={`container ${styles.heroInner}`}>
           <motion.div className={styles.heroCopy} initial={{opacity:0,y:28}} animate={{opacity:1,y:0}} transition={{duration:.8,ease:[.22,1,.36,1]}}>
-            <p className="eyebrow">Le Hub by Yana</p>
-            <h1>Your French doesn&apos;t end<br/>when the <em>class does.</em></h1>
-            <p>Meet your classroom, practice space, vocabulary bank and progress system — built around the way Yana teaches.</p>
+            <p className={`eyebrow ${polish.dashboardEyebrow}`}>Le Hub dashboard</p>
+            <h1>Open Le Hub.<br/>Know exactly <em className={polish.motionUnderline}>what comes next.</em></h1>
+            <p>Your next task, next class, current level, weekly focus, progress and upcoming tests — arranged around the way Yana teaches.</p>
+            <div className={polish.dashboardMicroRow}>
+              <div className={polish.dashboardMicro}><span>NEXT</span><strong>Listening · 18 min</strong></div>
+              <div className={polish.dashboardMicro}><span>LEVEL</span><strong>TEF · CLB 7+</strong></div>
+              <div className={polish.dashboardMicro}><span>FOCUS</span><strong>Natural connectors</strong></div>
+            </div>
             <div className={styles.heroActions}>
-              <a href="#inside" className="button button--dark">See inside Le Hub <span>↓</span></a>
+              <a href="#lexique" className="button button--dark">Explore Le Hub <span>↓</span></a>
               <Link href="/find-your-batch" className="button button--ghost">Find your batch</Link>
             </div>
           </motion.div>
           <motion.div className={styles.heroStage} initial={{opacity:0,scale:.96,y:45}} animate={{opacity:1,scale:1,y:0}} transition={{duration:1,delay:.12,ease:[.22,1,.36,1]}}>
+            <div className={polish.heroStageGlow}/>
             <MiniDashboard />
             <motion.div className={styles.floatingNote} animate={{y:[0,-9,0]}} transition={{duration:5,repeat:Infinity,ease:"easeInOut"}}><span>YANA&apos;S NOTE</span><strong>Better rhythm today.</strong><small>One thing to revisit →</small></motion.div>
             <motion.div className={styles.floatingWord} animate={{y:[0,8,0]}} transition={{duration:6,repeat:Infinity,ease:"easeInOut",delay:.4}}><span>WORD OF THE WEEK</span><strong>pourtant</strong><small>however · yet</small></motion.div>
           </motion.div>
         </div>
-        <div className={styles.heroMarquee}><span>CLASS → PRACTICE → FEEDBACK → REVISION → PROGRESS →</span><span>CLASS → PRACTICE → FEEDBACK → REVISION → PROGRESS →</span></div>
       </section>
 
-      <section id="inside" className={styles.inside}>
+      <div className={polish.marqueeShell} aria-hidden="true">
+        <div className={polish.marqueeTrack}>
+          {[0,1,2,3].map(i=><span className={polish.marqueeItem} key={i}>CLASS → PRACTICE → FEEDBACK → REVISION → PROGRESS →</span>)}
+        </div>
+      </div>
+
+      <section id="lexique" className={styles.lexiqueSection}>
+        <div className={`container ${styles.lexiqueGrid}`}>
+          <motion.div className={`${styles.lexiqueCopy} ${polish.lexiqueIntro}`} {...reveal}>
+            <p className="eyebrow eyebrow--light">Meet Lexique</p>
+            <h2>Not just translation.<br/><em>Understanding.</em></h2>
+            <p>A word becomes pronunciation, conjugation, context, an example, and something worth revisiting later.</p>
+            <div className={polish.lexiqueFeatureGrid}>
+              {lexiqueTools.map(([type,title,detail],i)=><motion.div className={polish.lexiqueFeatureCard} key={title} initial={{opacity:0,y:18}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:.45,delay:.08*i}} whileHover={{y:-6}}>
+                <span className={polish.lexiqueIcon}><ToolIcon type={type}/></span>
+                <strong>{title}</strong>
+                <small>{detail}</small>
+              </motion.div>)}
+            </div>
+          </motion.div>
+          <motion.div {...reveal}>
+            <motion.div className={polish.lexiqueCardFloat} animate={{y:[0,-7,0]}} transition={{duration:8,repeat:Infinity,ease:"easeInOut"}}><LexiqueCard /></motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section id="inside" className={`${styles.inside} ${polish.insideRefined}`}>
         <div className="container">
-          <motion.div className={styles.sectionHead} {...reveal}>
+          <motion.div className={`${styles.sectionHead} ${polish.sectionHeadRefined}`} {...reveal}>
             <p className="eyebrow">One learning space</p>
             <h2>Less searching.<br/><em>More learning.</em></h2>
-            <p>Class recordings, notes, practice, feedback and tests stay connected — so the next thing to do always feels obvious.</p>
+            <p>Your French doesn&apos;t end when the class does. Recordings, notes, practice, feedback and revision stay connected — so the next useful action is always close.</p>
           </motion.div>
-          <div className={styles.screenStory}>
-            <motion.div className={styles.screenCopy} {...reveal}><span>01</span><small>DASHBOARD</small><h3>Know what matters <em>today.</em></h3><p>Next task. Next class. Current level. This week&apos;s focus. Progress. Upcoming tests. Nothing noisy, nothing buried.</p></motion.div>
-            <motion.div className={styles.screenFrame} {...reveal}><MiniDashboard /></motion.div>
-          </div>
-          <div className={`${styles.screenStory} ${styles.screenStoryReverse}`}>
-            <motion.div className={styles.screenCopy} {...reveal}><span>02</span><small>CURRENT COURSE</small><h3>Class doesn&apos;t disappear <em>after Zoom.</em></h3><p>Lessons, recordings, notes, words of the week and tests become one continuous course instead of five different folders.</p></motion.div>
-            <motion.div className={styles.screenFrame} {...reveal}><CourseScreen /></motion.div>
+
+          <motion.div className={polish.learningFlowWrap} {...reveal}>
+            <div className={polish.learningFlowTop}>
+              <span>HOW LE HUB KEEPS LEARNING MOVING</span>
+              <p>One continuous loop instead of scattered links, folders and messages.</p>
+            </div>
+            <div className={polish.learningFlow}>
+              {learningFlow.map(([number,title,detail],i)=><motion.div className={polish.flowStep} key={title} initial={{opacity:0,y:16}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:.45,delay:.08*i}}>
+                <div className={polish.flowIndex}>{number}</div>
+                <strong>{title}</strong>
+                <small>{detail}</small>
+              </motion.div>)}
+            </div>
+          </motion.div>
+
+          <div className={`${styles.screenStory} ${styles.screenStoryReverse} ${polish.courseStory}`}>
+            <motion.div className={`${styles.screenCopy} ${polish.courseStoryCopy}`} {...reveal}><span>03</span><small>CURRENT COURSE</small><h3>Class doesn&apos;t disappear <em>after Zoom.</em></h3><p>Lessons, recordings, notes, words of the week and tests become one continuous course instead of five different folders.</p></motion.div>
+            <motion.div className={`${styles.screenFrame} ${polish.safeFrame} ${polish.courseStoryFrame}`} initial={{opacity:0,y:34,scale:.97}} whileInView={{opacity:1,y:0,scale:1}} viewport={{once:true,margin:"-12%"}} transition={{duration:.8,ease:[.22,1,.36,1]}}><CourseScreen /></motion.div>
           </div>
         </div>
       </section>
@@ -197,20 +264,8 @@ export function LeHubShowcase() {
             <div><p className="eyebrow eyebrow--light">The workspace</p><h2>Practice goes in.<br/><em>Yana comes back.</em></h2></div>
             <p>Write it. Upload it. Record it. Yana can mark it, comment on it, leave a voice note, or ask you to try again. The technology extends the teaching — it never replaces it.</p>
           </motion.div>
-          <motion.div className={styles.workspaceFrame} {...reveal}><WorkspaceScreen /></motion.div>
+          <motion.div className={`${styles.workspaceFrame} ${polish.workspaceFrameRefined}`} initial={{opacity:0,y:36,scale:.975}} whileInView={{opacity:1,y:0,scale:1}} viewport={{once:true,margin:"-12%"}} transition={{duration:.85,ease:[.22,1,.36,1]}}><WorkspaceScreen /></motion.div>
           <div className={styles.practiceTypes}><span>Homework</span><span>Reading</span><span>Writing</span><span>Speaking</span><span>Listening</span><span>Practice</span></div>
-        </div>
-      </section>
-
-      <section className={styles.lexiqueSection}>
-        <div className={`container ${styles.lexiqueGrid}`}>
-          <motion.div className={styles.lexiqueCopy} {...reveal}>
-            <p className="eyebrow eyebrow--light">Meet Lexique</p>
-            <h2>Not just translation.<br/><em>Understanding.</em></h2>
-            <p>A word becomes pronunciation, conjugation, context, an example, and something worth revisiting later.</p>
-            <div className={styles.lexiqueFeatures}><span>Pronunciation</span><span>Conjugation</span><span>Natural usage</span><span>Saved vocabulary</span><span>Revision</span></div>
-          </motion.div>
-          <motion.div {...reveal}><LexiqueCard /></motion.div>
         </div>
       </section>
 
