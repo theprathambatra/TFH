@@ -1,4 +1,3 @@
-import { ResourcesFeature } from "@/components/ResourcesFeature";
 import { Hero } from "@/components/Hero";
 import { Pathways } from "@/components/Pathways";
 import { TefFeature } from "@/components/TefFeature";
@@ -9,6 +8,7 @@ import { ResultsPreview } from "@/components/ResultsPreview";
 import { Approach } from "@/components/Approach";
 import { LanguageJourney } from "@/components/LanguageJourney";
 import { ClassFormat } from "@/components/ClassFormat";
+import { ResourcesFeature } from "@/components/ResourcesFeature";
 import { FinalCta } from "@/components/FinalCta";
 
 export default function Home() {
