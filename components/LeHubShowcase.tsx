@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { asset } from "@/lib/site";
 import styles from "./LeHubShowcase.module.css";
 import polish from "./LeHubPolish.module.css";
+import { IntelligenceExperience, ProgressExperience } from "./LeHubIntelligenceProgress";
 
 const reveal = {
   initial: { opacity: 0, y: 34 },
@@ -165,16 +166,6 @@ function LexiqueCard() {
   );
 }
 
-function IntelligenceSignals() {
-  const items = [
-    ["Listening", "Fast speech is still costing you details.", "3 sessions"],
-    ["Vocabulary", "7 saved words are ready for revision.", "Today"],
-    ["Grammar", "Agreement errors repeat in longer answers.", "Pattern found"],
-    ["Next test", "Practice will lean slightly more oral.", "Adaptive"],
-  ];
-  return <div className={styles.signalList}>{items.map(([label,text,meta],i)=><motion.div {...reveal} transition={{...reveal.transition,delay:i*.07}} key={label}><span>0{i+1}</span><div><small>{label}</small><strong>{text}</strong></div><em>{meta}</em></motion.div>)}</div>;
-}
-
 export function LeHubShowcase() {
   return (
     <div className={styles.page}>
@@ -269,32 +260,8 @@ export function LeHubShowcase() {
         </div>
       </section>
 
-      <section className={styles.intelligenceSection}>
-        <div className="container">
-          <motion.div className={styles.intelligenceHead} {...reveal}>
-            <p className="eyebrow">Intelligence, quietly built in</p>
-            <h2>Le Hub learns from<br/><em>your learning.</em></h2>
-            <p>Not a chatbot shouting “AI”. A quieter layer that notices what deserves another look and helps practice become more relevant over time.</p>
-          </motion.div>
-          <IntelligenceSignals />
-          <motion.div className={styles.intelligenceNote} {...reveal}><span>THE PRINCIPLE</span><strong>Technology notices patterns.<br/>Yana decides what matters.</strong></motion.div>
-        </div>
-      </section>
-
-      <section className={styles.progressSection}>
-        <div className="container">
-          <motion.div className={styles.progressHead} {...reveal}><p className="eyebrow">Mon Parcours</p><h2>Know how far<br/><em>you&apos;ve actually come.</em></h2><p>Not streaks. Not meaningless points. A clear view of the language journey, test performance and what is changing.</p></motion.div>
-          <motion.div className={styles.levelPath} {...reveal}>
-            {[["A1","Foundations"],["A2","Everyday French"],["B1","Independent"],["B2","Confident"],["C1","Advanced"]].map(([level,label],i)=><div className={`${styles.level} ${i<3?styles.levelDone:""} ${i===2?styles.levelCurrent:""}`} key={level}><div className={styles.levelDot}>{i<2?"✓":level}</div><strong>{level}</strong><span>{label}</span>{i===2&&<small>YOU ARE HERE</small>}</div>)}
-            <div className={styles.levelLine}><i/></div>
-          </motion.div>
-          <div className={styles.progressMetrics}>
-            <motion.div {...reveal}><span>Listening</span><strong>+18%</strong><small>last 6 weeks</small></motion.div>
-            <motion.div {...reveal}><span>Speaking</span><strong>7.8/10</strong><small>latest assessment</small></motion.div>
-            <motion.div {...reveal}><span>Tests</span><strong>4 / 5</strong><small>target reached</small></motion.div>
-          </div>
-        </div>
-      </section>
+      <IntelligenceExperience />
+      <ProgressExperience />
 
       <section className={styles.humanSection}>
         <div className={`container ${styles.humanGrid}`}>
