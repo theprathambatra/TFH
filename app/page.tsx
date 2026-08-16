@@ -1,3 +1,4 @@
+import { ResourcesFeature } from "@/components/ResourcesFeature";
 import { Hero } from "@/components/Hero";
 import { Pathways } from "@/components/Pathways";
 import { TefFeature } from "@/components/TefFeature";
